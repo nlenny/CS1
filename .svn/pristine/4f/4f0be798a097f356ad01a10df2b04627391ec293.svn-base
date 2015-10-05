@@ -1,0 +1,12 @@
+#ifndef CONVERTER_H
+#define CONVERTER_H
+
+
+void convertToTen(int&num, int& oldBase, int&newBase)
+void TenToAnyBase(int&num, int& oldBase, int&newBase)
+
+
+#include<iostream>
+using namespace std;
+
+#endif

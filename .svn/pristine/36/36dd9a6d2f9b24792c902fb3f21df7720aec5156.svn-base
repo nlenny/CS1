@@ -1,0 +1,149 @@
+//Ngwa T Leonard
+//CS1 Summer Session
+//Lab12. Finding the factorial of a number and outputting it on sreen or printing on a file.
+//01/23/2013
+
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+
+using namespace std;
+struct student
+{
+	string Name;
+	float exam1, exam2, exam3, finalexam;
+	float FinalGrade;
+	char LetterGrade;
+	short Rank;
+};
+
+void keyboardInput(student*)//allows user to put in info from keyboard
+{
+	double exam1, exam2, exam3, finalexam;
+
+	cout <<"This option allows you to enter your grades from the keyboard. Please proceed." << endl << endl;
+	cout <<"Please enter your exam 1 grade." << endl;
+	cin >> exam1;
+	cout << endl;
+	cout <<"Please enter your exam 2 grade." << endl;
+	cin >> exam2;
+	cout << endl;
+	cout <<"Please enter your exam 3 grade." << endl;
+	cin >> exam3;
+	cout << endl;
+	cout <<"Please enter your exam 4 grade." << endl;
+	cin >> finalexam;
+	cout << endl;
+
+}
+
+void fileInput(student* filename)
+{
+	double exam1, exam2, exam3, finalexam;
+	float finalGrade;
+	char Name[15], letterGrade;
+
+	ifstream finalgrade_in;
+    ofstream finalgrade_out;
+
+	finalgrade_in.open("grade.txt");
+    if(finalgrade_in.fail()){
+        cout << "Input file failed to open.";
+        exit(1);
+    }
+    finalgrade_out.open("finalgrade.txt");
+
+    finalgrade_out << std::setw(15) << "Name" << std::setw(15) << "Exam 1" << std::setw(15) << "Exam 2" << std::setw(15) 
+		           << "Exam 3" << std::setw(15) << "Final Exam" << std::setw(15) << "Final Grade" << std::setw(15) << "Grade" << std::endl;
+
+	while(finalgrade_in >> Name >> exam1 >> exam2 >> exam3 >> finalexam)
+	{
+		finalGrade = (0.2 * (exam1 + exam2 + exam3)) + (0.4 * finalexam); // Calculates final grade and assigns a letter grade.
+        
+        if(finalGrade<60)
+           letterGrade = 'F';
+        else if(finalGrade<70)
+            letterGrade = 'D';
+        else if(finalGrade<80)
+            letterGrade = 'C';
+        else if(finalGrade<90)
+            letterGrade = 'B';
+        else
+            letterGrade = 'A';
+
+	finalgrade_out << std::setw(15) << Name << std::setw(15) << exam1 << std::setw(15) << exam2 << std::setw(15) << exam3 << std::setw(15) << finalexam 
+		           << std::setw(15) << finalGrade << std::setw(15) << letterGrade << std::endl;
+	}
+
+        
+}
+
+void finalGrade(student*)
+{
+	
+	double exam1, exam2, exam3, finalexam;
+	float finalGrade;
+	char Name[15], letterGrade;
+
+        finalGrade = (0.2 * (exam1 + exam2 + exam3)) + (0.4 * finalexam); 
+        
+        if(finalGrade<60)
+           letterGrade = 'F';
+        else if(finalGrade<70)
+            letterGrade = 'D';
+        else if(finalGrade<80)
+            letterGrade = 'C';
+        else if(finalGrade<90)
+            letterGrade = 'B';
+        else
+            letterGrade = 'A';
+}
+
+
+void studentRank(student*)
+
+{
+	short Rank;// using the sort algorithm here
+
+	/*In order to do this you will have to dynamically allocate a separate array contain short integer numbers
+	that has the same number of elements as the number of records stored in the student structure. You will use 
+	a selection sort algorithm to assist in generating and assigning a rank value for each of the records in the structure. 
+	Delete the array you allocated to assist in generating the rank for each record after finish the ranking task.*/
+}
+
+int main()
+{
+	student;
+	keyboardInput(student*);
+	fileInput(student* filename);
+	finalGrade(student*);
+	studentRank(student*);
+	
+	return 0;
+}
+/*Write a function to read data set from the keyboard. It should ask the user to enter how many student records to be entered (Maximum is 50) and store in the structure. Before you insert each record in the structure you can compute the final grade and assign the letter grade to each record. 
+
+Write a function to read records from a file and insert the records into the structure. Read data from an input file until the file is empty. Before you insert each record in the structure you can compute the final grade and assign the letter grade to each record. Each record in the file will contain the following information: name, exam1, exam2, exam3, finalexam.
+Example:
+Michael 65 75 85 95 
+....
+Write a function to compute final grade and assign the letter grade to each record. Formula for compute the final grade is following:
+Final grade = exam1 * 0.2 + exam2 * 0.2 + exam3 * 0.2 + exam4 * 0.4
+Letter grades are assigned based on the following scale.
+90 - 100 A
+80 - 89 B
+70 - 79 C
+60 - 69 D
+Below F
+
+
+
+Write a function to rank the students in order of the final grade so that the highest grade has a rank of 1 and the lowest grade has a rank with a high number. In order to do this you will have to dynamically allocate a separate array contain short integer numbers that has the same number of elements as the number of records stored in the student structure. You will use a selection sort algorithm to assist in generating and assigning a rank value for each of the records in the structure. Delete the array you allocated to assist in generating the rank for each record after finish the ranking task. 
+
+Write a function to send the data to an output file named "finalgrade.out". Write each record to the output file. Before you write the records in the structure, write a heading for each field based on the description of the structure above. Align the output so that each record is aligned in the output file. Write an end of line marker at the end of each record while writing to the output file. Print the records in ascending order using the Rank field to screen. 
+
+Make sure your program adheres to proper programming style. Submit your project to the subversion repository. Do not forget to verify your submission on the web. File name should be "structgrade.cpp" 
+
+*/

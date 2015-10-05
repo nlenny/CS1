@@ -1,0 +1,138 @@
+//Ngwa T Leonard
+//CS1 Summer Session
+//Lab12. Finding the factorial of a number and outputting it on sreen or printing on a file.
+//01/23/2013
+
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+
+using namespace std;
+
+
+void printFactorial(const int& num, bool file_out);
+
+ofstream f_out("factorial.txt");
+
+
+int main()
+
+{
+	char response;
+
+	cout<<"This program will help you calculate the factorial of a number."<<endl<<endl;
+	do {
+
+	char answer;
+	// Must ask user once, if they want the results printed on a file before printing. 
+	int num; // just declared this.
+	
+	cout<<"What is your number?"<<endl<<endl;
+	cin>>num;
+	cout<<endl;
+	cout<<"Do you wish to print the factorial of this number to a file?"<<endl<<endl<<"Please enter 'Y' for yes if you wish to do so."<<endl<<endl;
+	cin>>answer;
+	cout<<endl;
+	//while((answer == 'Y') || (answer == 'y'))
+	
+	
+	//printFactorial(50,true);
+	printFactorial(num,true);
+
+	system("pause");
+	f_out.close();
+
+	cout <<"Do you wish to calculate the factorial of another number?"<<endl<<endl;
+	cin >> response;
+	cout<<endl;
+	}while((response == 'Y') || (response == 'y'));
+		return 0;
+}
+
+
+void printFactorial(const int& num, bool file_out)
+{
+	int *factorial= new int[100];
+	int carry, numElements, result,N, remainder;
+	int power10=999999 + 1;
+	N = num;
+	numElements = 1;
+	factorial[0] = 1;
+	for (int i = 1; i <= N; i++)
+	{
+		carry = 0;
+		for (int j = 0; j < numElements; j++)
+		{
+			result = factorial[j] * i + carry;
+			if (result > power10 - 1)
+			{
+				carry = result/power10;
+				remainder = result - (carry * power10); 
+				factorial[j] = remainder;
+			}
+			else 
+			{
+				carry = 0;
+				factorial[j] = result;
+			}
+		}
+		if (carry > 0)
+		{
+			factorial[numElements] = carry;
+			numElements++;
+		}
+	}
+	
+	cout << N <<"! = ";
+	if (file_out)
+	{
+		f_out << N <<"! = ";
+	}
+	for (int i = numElements-1; i >= 0; i--)// numElements - 1, is the 1st elt
+	{
+		//output factorial[i]
+		if (factorial[i] == 0)
+		{
+			cout <<"000000";
+			if (file_out)
+			{
+				f_out << "000000";
+			}
+		}
+		else if(numElements-1 == i)
+		{
+			cout << factorial[i];
+			if (file_out)
+			{
+				f_out << factorial[i];
+			}
+		}
+		else
+		{
+			double numDigits = log(static_cast<double> ( factorial[i]))/log(10.0)+1;
+			// 6 digits in a block
+			int zeros = 6 - (static_cast<int> (numDigits));
+
+			for (int j = 0; j < zeros; j++)
+			{
+				cout << 0;
+				if (file_out)
+				{
+					f_out << 0;
+				}		
+			}
+			cout << factorial[i];
+			if (file_out)
+			{
+				f_out << factorial[i];
+			}
+		}
+	}
+	cout<<endl;
+	if (file_out)
+		f_out << endl;
+	delete[] factorial;
+
+}

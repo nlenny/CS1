@@ -1,0 +1,62 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>
+
+int main () {
+	using namespace std;
+	ifstream in_stream;
+	ofstream out_stream;
+	in_stream.open("grade.dat");
+	out_stream.open("finalgrade.dat");
+
+	int exam_One, exam_Two, exam_Three, exam_Four;
+	double final_Grade;
+	char name[30], Letter_grade;
+	
+	cout << "Begins to computer students grade! " << endl;
+	out_stream << setw(8) << "name" << setw(8) << "exam_One" << setw(8) << "exam_Two" << setw(10) << "exam_Three" << setw(9) << "exam_Four" << setw(11) << "final score" << setw(11) << "Letter grade" << endl;
+	
+	while(in_stream >> name >> exam_One >> exam_Two >> exam_Three >> exam_Four) 
+	{
+	final_Grade = exam_One * 0.2 + exam_Two * 0.2 + exam_Three * 0.2 + exam_Four * 0.4;
+	out_stream << setw(8) << name << setw(8) << exam_One << setw(8) << exam_Two << setw(10) 
+		       << exam_Three << setw(9) << exam_Four << setw(11) << final_Grade << setw(11);
+	
+			if((final_Grade >= 90)&&(final_Grade <= 100)){
+            
+			out_stream << "A" << endl;}
+		else
+
+			if((final_Grade >= 80)&&(final_Grade < 90)){
+				out_stream << " B " << endl;
+			}
+			else
+
+				if((final_Grade >= 70)&&(final_Grade < 80)){
+
+					out_stream << "C" << endl;
+				}
+				else
+
+					if((final_Grade >= 60)&&(final_Grade < 70)){
+
+						out_stream << "D" << endl;
+					}
+					
+					if(final_Grade < 60){
+						
+						out_stream << "F" <<endl;
+					}
+	}
+					
+	cout << "Grading is complete!" << endl;
+
+	in_stream.close();
+	
+	out_stream.close();
+
+	return 0;
+
+}
+

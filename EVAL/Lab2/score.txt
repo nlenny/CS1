@@ -1,0 +1,13 @@
+=================================================================================
+Score: 45 
+
+  Remarks:
+   squarecube.cpp:
+     -5  Did not show all of digits on the result.
+
+  Ask your lab instructor if you have any questions about or problems
+  with your score.
+
+-------------------
+2013-June-18
+-------------------

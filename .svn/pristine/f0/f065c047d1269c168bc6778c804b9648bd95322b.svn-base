@@ -1,0 +1,11 @@
+#ifndef CONVERTER_H
+#define CONVERTER_H
+
+
+
+void userInfo(int&, int&, int&);
+void convetToTen(int&, int&, int&);
+void tenToAnyBase(int&, int&, int&);
+
+
+#endif 

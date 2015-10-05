@@ -1,0 +1,83 @@
+// Ngwa T Leonard
+// CS1, Program 7.
+// 07/05/2013
+// Code to read student names, their exam scores, calculate their final grade, assign a letter grade, from one file and print it to another.
+
+// My included libraries.
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>  // Included to use setw()
+    
+int main(){
+	using namespace std;
+    ifstream inStream;
+    ofstream outStream;
+    
+    inStream.open("grade.txt");
+    if(inStream.fail()){          // Tests if my file opens and outputs a message if it doesn't
+        cout << "Input file failed to open.";
+        exit(1);
+    }
+    outStream.open("finalgrade.txt");
+        
+    double examOne, examTwo, examThree, examFour, finalGrade;
+    char firstName[10], lastName[10], letterGrade;
+        
+    cout << "Computing students' grade." << endl;
+
+    outStream << setw(20) << "Name" << setw(12) << "Exam 1" << setw(12) << "Exam 2" << setw(12) << "Exam 3" << setw(12) << "Exam 4" << setw(15) << "Final Score" << setw(15) << "Grade" << endl;
+        
+    inStream >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+    
+	//Using a while loop to continue reading from the created file, if it is not the end of the file.
+    while(!inStream.eof()){
+
+        finalGrade = examOne * 0.2 + examTwo * 0.2 + examThree * 0.2 + examFour * 0.4;
+
+		 outStream << setw(10) << firstName << setw(10) << lastName << setw(12) << examOne << setw(12) << examTwo << setw(12) << examThree << setw(12) << examFour << setw(15) << finalGrade << setw(15) << letterGrade << endl;
+
+        inStream >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+
+        // code to assign letter grades.
+        if(finalGrade<60)
+           letterGrade = 'F';
+        else if(finalGrade<70)
+            letterGrade = 'D';
+        else if(finalGrade<80)
+            letterGrade = 'C';
+        else if(finalGrade<90)
+            letterGrade = 'B';
+        else
+            letterGrade = 'A';
+        
+        outStream << setw(10) << firstName << setw(10) << lastName << setw(12) << examOne << setw(12) << examTwo << setw(12) << examThree << setw(12) << examFour << setw(15) << finalGrade << setw(15) << letterGrade << endl;
+        
+		inStream >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+
+    }
+    // Calculates and assigns the students final grades.
+	finalGrade = (0.2 * (examOne + examTwo + examThree)) + (0.4 * examFour);
+    
+    if(finalGrade<60)
+        letterGrade = 'F';
+    else if(finalGrade<70)
+        letterGrade = 'D';
+    else if(finalGrade<80)
+        letterGrade = 'C';
+    else if(finalGrade<90)
+        letterGrade = 'B';
+    else
+        letterGrade = 'A';
+    
+	outStream << setw(10) << firstName << setw(10) << lastName << setw(12) << examOne << setw(12) << examTwo << setw(12) << examThree << setw(12) << examFour << setw(15) << finalGrade << setw(15) << letterGrade;
+    
+	inStream >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+
+    cout << "Grading is complete!";
+    // Closes the input and output files.
+	inStream.close();
+    outStream.close();
+    
+	return 0;
+}

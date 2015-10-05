@@ -1,0 +1,107 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+
+using namespace std;
+void printFactorial(const int& num, bool file_out);
+
+ofstream f_out("factorial.txt");
+
+
+int main()
+
+{
+
+	printFactorial(50,true);
+	system("pause");
+	f_out.close();
+	return 0;
+}
+
+
+void printFactorial(const int& num, bool file_out)
+{
+	int *factorial= new int[100];
+	int carry, numElements, result,N, remainder;
+	int power10=999999 + 1;
+	N = num;
+	numElements = 1;
+	factorial[0] = 1;
+	for (int i = 1; i <= N; i++)
+	{
+		carry = 0;
+		for (int j = 0; j < numElements; j++)
+		{
+			result = factorial[j] * i + carry;
+			if (result > power10 - 1)
+			{
+				carry = result/power10;
+				remainder = result - (carry * power10); 
+				factorial[j] = remainder;
+			}
+			else 
+			{
+				carry = 0;
+				factorial[j] = result;
+			}
+		}
+		if (carry > 0)
+		{
+			factorial[numElements] = carry;
+			numElements++;
+		}
+	}
+	
+	cout << N <<"! = ";
+	if (file_out)
+	{
+		f_out << N <<"! = ";
+	}
+	for (int i = numElements-1; i >= 0; i--)// numElements - 1 is the 1st elt
+	{
+		//output factorial[i]
+		if (factorial[i] == 0)
+		{
+			cout <<"000000";
+			if (file_out)
+			{
+				f_out << "000000";
+			}
+		}
+		else if(numElements-1 == i)
+		{
+			cout << factorial[i];
+			if (file_out)
+			{
+				f_out << factorial[i];
+			}
+		}
+		else
+		{
+			double numDigits = log(static_cast<double> ( factorial[i]))/log(10.0)+1;
+			// 6 digits in a block
+			int zeros = 6 - (static_cast<int> (numDigits));
+
+			for (int j = 0; j < zeros; j++)
+			{
+				cout << 0;
+				if (file_out)
+				{
+					f_out << 0;
+				}		
+			}
+			cout << factorial[i];
+			if (file_out)
+			{
+				f_out << factorial[i];
+			}
+		}
+	}
+	cout<<endl;
+	if (file_out)
+		f_out << endl;
+	delete[] factorial;
+
+}

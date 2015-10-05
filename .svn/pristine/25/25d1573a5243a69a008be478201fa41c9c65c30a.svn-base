@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstdlib>
+void numFinder(int& rowSize, int& colSize, int& rowSub, int& colSub);
+
+int main(){
+	int rowSize,colSize,rowSub, colSub;
+	char response;
+	do{
+		numFinder(rowSize, colSize, rowSub, colSub);
+		std::cout<<"Do you want to continue the program? Enter Y for yes N or no"<<std::endl;
+		std::cin>>response;
+	}while ((response == 'Y') || (response == 'y'));
+	
+	return 0;
+	
+}
+
+void numFinder(int& rowSize, int& colSize, int& rowSub, int& colSub)
+{
+	
+	std::cout<< "enter row size"<<std::endl;
+	std::cin>>rowSize;
+	
+	std::cout<<"Please enter column size"<<std::endl;
+	std::cin>>colSize;
+
+	do 
+	{
+	std::cout<<"Please enter your row subscript"<<std::endl;
+		std::cin>>rowSub;
+ 
+		
+	
+	std::cout<<"Please enter your column subscript"<<std::endl;
+	std::cin>>colSub;
+	}while ((!rowSub==-1)&&(!colSub==-1));
+	
+	
+
+	
+	int offset, actual_row_subscript, actual_column_subscript;
+
+	offset = rowSub*colSize+colSub;//Make sure to output right message for corresponding offset values.i.e if(offset > (rowSize*colSize)
+	actual_row_subscript = offset/colSize;
+	actual_column_subscript = offset % colSize;
+
+	std::cout<<"The array has "<<rowSize<<", and "<< colSize<<" columns."<<std::endl<<std::endl;
+	std::cout<<"The subscripts entered are: "<<rowSub<<"row, and "<< colSub<<" columns"<<std::endl<<std::endl;
+	std::cout<<"The actual location of the element in the is"<<actual_row_subscript<<" and "<<actual_column_subscript<<std::endl;
+
+
+
+}
+
+
+

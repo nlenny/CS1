@@ -1,0 +1,187 @@
+//Ngwa T Leonard
+//CS1 Summer Session
+//Lab12. Using structures to calculate student grades, assign a grade and rank them.
+//01/25/2013
+
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+// Structure and members.
+struct student
+{
+	string name;
+	float exam1, exam2, exam3, finalexam;
+	float finalGrade;
+	char letterGrade;
+	short rank;
+};
+
+void finalGrade(student &myStudent)
+{
+
+	myStudent.finalGrade = (0.2 * (myStudent.exam1 + myStudent.exam2 + myStudent.exam3)) + (0.4 * myStudent.finalexam); 
+
+	if(myStudent.finalGrade<60)
+		myStudent.letterGrade = 'F';
+	else if(myStudent.finalGrade<70)
+		myStudent.letterGrade = 'D';
+	else if(myStudent.finalGrade<80)
+		myStudent.letterGrade = 'C';
+	else if(myStudent.finalGrade<90)
+		myStudent.letterGrade = 'B';
+	else
+		myStudent.letterGrade = 'A';
+}
+
+// This function allows the user to enter their informations from the keyboard.
+int keyboardInput(student* stuArray)
+
+{
+
+	int numOfStudents;
+	
+
+	cout <<"This option allows you to enter your grades from the keyboard. Please proceed." << endl << endl;
+
+	cout<<"How many students do you have to enter?"<<endl;
+
+	cin>> numOfStudents;
+
+	stuArray = new student[numOfStudents];
+
+	for (int i = 0; i < numOfStudents; i++)
+	{
+		cout<<"Now entering student "<<i+1 << endl;
+
+		cout <<"Please enter this student's name." << endl;
+		cin >> stuArray[i].name;
+		cout << endl;
+
+		cout <<"Please enter this student's exam 1 grade." << endl;
+		cin >> stuArray[i].exam1;
+		cout << endl;
+
+		cout <<"Please enter this student's exam 2 grade." << endl;
+		cin >> stuArray[i].exam2;
+		cout << endl;
+
+		cout <<"Please enter this student's exam 3 grade." << endl;
+		cin >> stuArray[i].exam3;
+		cout << endl;
+
+		cout <<"Please enter this student's final exam grade." << endl;
+		cin >> stuArray[i].finalexam;
+		cout << endl;
+
+		finalGrade(stuArray[i]);
+		cout<<stuArray[i].finalGrade;
+		cout<<stuArray[i].letterGrade;
+	}
+
+	return numOfStudents;
+	
+}
+
+int fileInput(student stuArray[])
+{
+	//student stuArray[50];
+	int studentCounter=0;
+	char  filename[30];
+
+	ifstream finalgrade_in;
+	cout<<"Please enter a file name for input"<<endl;
+	cin>>filename;
+
+	finalgrade_in.open(filename);
+
+	if(finalgrade_in.fail())
+	{
+		cout << "Input file failed to open.";
+		exit(1);
+	}
+
+	while(finalgrade_in >> stuArray[studentCounter].name >> stuArray[studentCounter].exam1 >> 
+		stuArray[studentCounter].exam2 >> stuArray[studentCounter].exam3 >> stuArray[studentCounter].finalexam)
+	{
+		finalGrade(stuArray[studentCounter]);
+		studentCounter++;
+	}
+
+	return studentCounter;
+
+}
+
+
+void studentRank(student* stuArr,int N)
+
+{
+	// using the sort algorithm here
+	for (int i = 0; i < N-1; i++)
+	{
+		//store the first elt and its position
+		float maxGrade=stuArr[i].finalGrade;
+		int maxPos=i;
+		for (int j=i+1; j<N; j++)
+		{
+			if (stuArr[j].finalGrade > maxGrade)
+			{
+				maxGrade = stuArr[j].finalGrade;
+				maxPos = j;
+
+			}
+		}
+		//swap stuArr[maxPos] with stuArr[i]
+	}
+	
+	
+}
+
+
+void printOut(student* stuArr,int studentCount)
+{
+
+	ofstream out("finalgrade.out");
+	out << setw(15) << "Name" << setw(15) << "Exam 1" << setw(15) << "Exam 2" << setw(15) << "Exam 3" 
+		<< setw(15) << "Final Exam" << setw(15) << "Final Grade" << std::setw(15) << " Letter Grade" << std::endl;
+
+	for (int i= 0; i<studentCount; i++)
+	{
+		out << setw(15) << stuArr[i].name << setw(15) << stuArr[i].exam1 << setw(15) << stuArr[i].exam2 << setw(15) 
+			<< stuArr[i].exam3 << setw(15) << stuArr[i].finalexam << setw(15) << stuArr[i].finalGrade << setw(15) 
+			<< stuArr[i].letterGrade << endl;
+	}
+
+	out.close();
+
+}
+
+int main()
+
+{
+	char response;
+	int numOfStudents=0, myStudent;
+	student stuArr[50];
+	
+	cout<<"Would you like to read in the student's grades from the keyboard, please enter 'K', else it will be from a  file? "<< endl;
+	cin>>response;
+
+	if((response == 'K')|| (response == 'k'))// an if else statement here will be nice. 
+		keyboardInput(stuArr);
+	else
+		fileInput(stuArr);
+	finalGrade(stuArr[numOfStudents]);
+
+	//studentRank(stuArr);
+	//numOfStudents=0;
+	printOut(stuArr, numOfStudents);
+
+	system("pause");
+	delete[] stuArr;
+	return 0;
+}

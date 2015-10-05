@@ -1,0 +1,114 @@
+#include <iostream>
+#include <cstdlib>
+ 
+int userInfo(int& num , int& oldBase, int& newBase);
+void convetToTen(int&num, int& oldBase);
+void TenToAnyBase(int& num, int& newBase);
+
+int main()
+	
+{char response;
+
+	do {
+	int num, oldBase, newBase;
+	
+	userInfo(num , oldBase, newBase);
+	convetToTen( num, oldBase);
+	TenToAnyBase(num, newBase);
+		
+	std::cout<<"Do you want to convert any more numbers?"<<std::endl;
+	std::cin>>response;
+		}while ((response=='Y')||(response=='y'));
+		return 0;
+
+}
+
+void  userInfo(int& num, int& oldBase, int& newBase)
+
+{
+	//int digit;
+	//char response('0'); // "response" value either continues or ends do-while loop
+    
+    do 
+	
+	{
+
+        //int num, oldBase, newBase;
+        std::cout << "Enter your number between 1 and 2147483647." << std::endl;
+        std::cin >> num;
+		
+        
+	}while((!num >= 1) && (!num <= 2147483647));
+		{ 
+            std::cout<<"Your number is out of range, please re-enter a valid number." << std::endl;
+
+            std::cin>>num;
+        }
+        
+        std::cout << "What base is your number currently in?"<< std::endl;
+
+        std::cin >> oldBase;
+
+        std::cout << "What base would you like your number converted to? (Must be between 2 to 10)" << std::endl;
+
+        std::cin >> newBase;
+
+        std::cout << std::endl;
+        
+        while((!newBase >= 2) && (!newBase <= 10))
+
+		{
+            std::cout << "New base input is out of range, please re-enter a new base to convert to, between 2 to 10." << std::endl << std::endl;
+
+            std::cin >> newBase;
+		}
+}
+
+void convetToTen(int&num, int& oldBase)
+
+	{
+
+	int digit, numNewBase, place;
+
+        if(oldBase!=10)
+		{
+            digit = num % 10;
+            
+        }
+            
+            int numBaseTen = digit;
+            place = 1;
+            num = num/10;
+            
+            while((!num < 0) && (!num > 2147483647))
+			{
+                digit = num % 10;
+                place = place * oldBase;
+                numBaseTen = numBaseTen + (digit * place);
+                num = num / 10;
+            }
+
+            num = numBaseTen;
+
+            std::cout<<"Your number in base 10 is "<< num <<std::endl;
+}
+
+void TenToAnyBase(int& num, int& newBase)
+
+{
+	int digit, numNewBase, place;
+	char response;
+
+	numNewBase = num % newBase;
+        place = 1;
+        num /= newBase;
+        
+            digit = num % newBase;
+            place *= 10;
+
+            numNewBase += (digit * place);
+            num /= newBase;
+        
+        std::cout << "Your number in base " << newBase << " is: " << numNewBase << std::endl << std::endl;
+
+}

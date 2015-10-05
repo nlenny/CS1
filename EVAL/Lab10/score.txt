@@ -1,0 +1,14 @@
+=================================================================================
+Score: 40
+
+  Remarks:
+   rollingdice.cpp:
+     -5  The output is not rolling correct time.
+     -5  Can not roll 100 times!
+
+  Ask your lab instructor if you have any questions about or problems
+  with your score.
+
+-------------------
+2012-July-22
+-------------------

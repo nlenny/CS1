@@ -1,0 +1,145 @@
+#include <iostream>
+
+using namespace std;
+
+const double PI = 3.141593;
+
+int main(){
+
+float length, width, height, radius;
+int choice;
+float SA_Box = 0.0;
+float vol_Cylinder = 0.0;
+float SA_Cylinder = 0.0;
+float vol_Sphere = 0.0;
+float SA_Sphere = 0.0;
+float vol_Box = 0.0;
+char choice;
+cout << "1: Volume of box" << endl;
+
+cout << "2: Surface area of box" << endl;
+
+cout << "3: Volume of cylinder" << endl;
+
+cout << "4: Surface area of cylinder" << endl;
+
+cout << "5: Volume of sphere" << endl;
+
+cout << "6: Surface area of sphere" << endl;
+
+
+cout << "Please select 6 for surface area of sphere" << endl;
+
+cin >> choice;
+
+
+
+
+
+
+
+
+
+
+switch (choice){
+case 1:
+
+	cout <<"Please enter the length" << endl;
+
+	cin >> length;
+	
+	cout <<"Please enter the width" << endl;
+
+	cin >> width;
+
+	cout <<"Please enter the height" << endl;
+
+	cin >> height;
+	
+	vol_Box = length * width * height;
+
+	cout <<"The volume of the box is " << vol_Box << endl;
+	break;
+
+case 2:
+	
+	cout <<"Please enter the length" << endl;
+
+	cin >> length;
+	
+	cout <<"Please enter the width" << endl;
+
+	cin >> width;
+
+	cout <<"Please enter the height" << endl;
+
+	cin >> height;
+	
+	
+	SA_Box = ((2*length*width) + (2*width*height) + (2*length*height));
+	
+	cout << "The surface area of the box is " << SA_Box << endl;
+
+	break;
+
+case 3:
+	
+	cout <<"Please enter the height" << endl;
+
+	cin >> height;
+
+	cout <<"Please enter the radius" << endl;
+
+	cin >> radius;
+
+	vol_Cylinder = PI*radius*2*height;
+
+	cout <<"The volume of the cylinder is " << vol_Cylinder << endl;
+
+	break;
+
+case 4:
+	cout <<"Please enter the height" << endl;
+
+	cin >> height;
+
+	cout <<"Please enter the radius" << endl;
+
+	cin >> radius;
+
+	SA_Cylinder = ((2*PI*radius*height) + (2*PI*radius*radius));
+
+	cout <<"The surface of the cylinder is " << SA_Cylinder << endl;
+
+	break;
+
+case 5:
+	
+	cout <<"Please enter the radius" << endl;
+
+	cin >> radius;
+
+	vol_Sphere = 4/3*PI*radius*radius*radius;
+
+	cout <<"The volume of the sphere is " << vol_Sphere << endl;
+
+	break;
+
+case 6:
+
+	cout <<"Please enter the radius" << endl;
+
+	cin >> radius;
+	
+	SA_Sphere = 4*PI*radius*radius;
+	
+	cout <<"The surface area of the sphere is " << SA_Sphere << endl;
+
+	break;
+
+default:
+
+	cout <<"You have not made a proper selection"
+
+}
+

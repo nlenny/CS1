@@ -1,0 +1,81 @@
+# include <iostream>
+using namespace std;
+
+void inputData(float, int);
+float finalGrade(float, int);
+void display(float, int);
+
+float grade[5];
+int main(){
+	
+
+
+	void inputData(float, int);
+	/*
+	cout<<"Please enter your first exam score, in the range 0 to 100"<<endl;
+	cin>>grade[1];
+	cout<<"Please enter your second exam score, in the range 0 to 100"<<endl;
+	cin>>grade[2];
+	cout<<"Please enter your third exam score, in the range 0 to 100"<<endl;
+	cin>>grade[3];
+	cout<<"Please enter your fourth exam score, in the range 0 to 100"<<endl;
+	cin>>grade[4];
+	*/
+	while((grade>0)||(!grade<=100)){
+		cout << grade[1] << grade[2] << grade[3] << grade[4]<< endl;
+
+	}
+	
+	
+	float finalGrade(float, int);
+	
+	void display(float, int);
+
+}
+
+void inputData(float grade[], int size)
+{
+	for (int i = 1; i <= size; i++)
+	{
+		do {
+		cout << grade[i];
+		
+			//cout <<"You input is invalid" << endl;// set flag to verify condition check
+	}while ((!grade>=0)||(!grade<=100));
+		
+
+}
+
+float finalGrade(float grade[], int size)
+{
+	grade[0] = (0.2*(grade[1] + grade[2] + grade[3]) + (0.4* grade[4]));
+	return grade[0];
+	//if((grade>=0)&&(grade<=100))
+	//cout <<"Final Grade: "<< grade[0];
+}
+
+void display(float grade[], int size)
+{
+	float gradeFinal = 0.0;
+	if (gradeFinal < 60)
+	{
+		cout <<"F";
+	}
+	else if(gradeFinal < 70)
+	{
+		cout <<"D";
+	}
+	else if(gradeFinal < 80)
+	{
+		cout <<"C";
+	}
+	else if(gradeFinal < 90)
+	{
+		cout <<"B";
+	}
+	else
+		cout <<"A";
+
+}
+
+

@@ -1,0 +1,87 @@
+#include <iostream>
+#include <iomanip>
+
+void inputData(float[], int);
+float finalGrade(float[], int);
+void display(float[], int);
+
+float grade[5];
+int size;
+char letterGrade, response;
+
+int main(){
+	
+	do {
+
+	 inputData(grade, size);
+
+	 finalGrade(grade, size);
+
+	 display(grade, size);
+	 
+	 system("pause");
+
+	 std::cout <<"Would you like to try another set of scores? Enter 'Y' for yes, and 'N' for no then press enter to exit program." <<std::endl;
+	 std::cin >> response;
+	 std::cout << std::endl;
+	}while ((response == 'Y') || (response == 'y'));
+
+	return 0;
+
+	
+}
+
+
+void inputData(float grade[], int size)
+{
+	std::cout <<"Please enter your 4 exam scores, and press enter after each entry. Your scores should range from 0, to 100" << std::endl;
+
+	std::cin >> grade[1] >> grade[2] >> grade[3] >> grade[4];
+	
+	for (int i = 1; i <= size; i++)
+	{
+		
+			std::cout << grade[i];
+			while ((!grade >= 0) || (!grade <= 100));
+		{
+			std::cout <<"Your exam score is out of range, please re-enter your score." << std::endl;
+			std::cin >> grade[1] >> grade[2] >> grade[3] >> grade[4];
+		}
+	}
+
+}
+
+float finalGrade(float grade[], int size)
+{
+	grade[0] = (0.2*(grade[1] + grade[2] + grade[3]) + (0.4* grade[4]));
+	
+	return grade[0];
+	
+}
+
+
+void display(float grade[], int size)
+{
+std::cout <<"Exam 1: "<< grade[1]<< std::endl <<"Exam 2: "<< grade[2] << std::endl << "Exam 3: "<< grade[3] << std::endl <<"Exam 4: "<< grade[4] << std::endl
+	<<"Final Grade: " << grade[0] << std::setw(4);
+	
+	if (grade[0] < 60)
+	{
+		std::cout <<"F" << std::endl;
+	}
+	else if(grade[0] < 70)
+	{
+		std::cout <<"D"<< std::endl;
+	}
+	else if(grade[0] < 80)
+	{
+		std::cout <<"C"<< std::endl;
+	}
+	else if(grade[0] < 90)
+	{
+		std::cout <<"B"<< std::endl;
+	}
+	else
+		std::cout <<"A"<< std::endl;
+
+}

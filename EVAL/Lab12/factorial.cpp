@@ -1,0 +1,163 @@
+//Ngwa T Leonard
+//CS1 Summer Session
+//Lab12. Finding the factorial of a number and outputting it on sreen or printing on a file.
+//01/23/2013
+
+
+// My factorial size is 100 and should only works for numbers below 500,  but it actually worked for numbers up to 1200!
+
+
+// My included libraries.
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+
+using namespace std;
+
+// Factorial function prototype
+void printFactorial(const int& num, long factorial[], bool file_out);
+
+//Declaring an output stream.
+ofstream f_out("factorial.txt");
+
+
+int main()
+
+{
+	long factorial[100];
+	// Asking the user once, if they will like to print their calculated factorial of their number to a file.
+	char response, answer;
+
+	cout<<"This program will help you calculate the factorial of a number."<<endl<<endl;
+	cout<<"When your factorial is calculated, would you like to print it to a file?"<<endl<<endl;
+	cout<<"Please enter 'Y' for yes if you wish to do so."<<endl<<endl;
+	
+	cin>>answer;
+	cout<<endl;
+
+	// A do while loop to keep running the program, if the user so chooses to do so.
+	do 
+	{
+	int num; 
+	
+	  cout<<"What is your number?"<<endl<<endl;
+	  cin>>num;
+	  while(num < 0)
+	    {
+		  cout<<"A negative number is not acceptable, please re-enter a new number."<<endl;
+		  cin>> num;
+	    }
+	      cout<<endl;
+
+		  // If else statement to process the user's request if they decide to print the factorial of their number to a file, or not.
+	   if((answer == 'Y') || (answer == 'y'))
+		   printFactorial(num, factorial, true);
+	   else 
+		   printFactorial(num, factorial, false);
+
+	   cout<<endl;
+	   cout <<"Do you wish to calculate the factorial of another number?"<<endl<<endl;
+	   cin >> response;
+	   cout<<endl;
+	}while((response == 'Y') || (response == 'y'));
+
+	system("pause");
+	f_out.close();
+	return 0;
+}
+
+
+
+void printFactorial(const int& num, long factorial[], bool file_out)
+{
+	
+	factorial[0]=1;
+	int carry, numElements, result,N, remainder;
+	double power10=1000000;
+	N = num;
+	numElements = 1;
+
+	//Actual function to calculate the factorial of a number.
+	for (int i = 1; i <= N; i++)
+	{
+		carry = 0;
+		for (int j = 0; j < numElements; j++)
+		{
+			result = factorial[j] * i + carry;
+			if (result > power10 - 1)
+			{
+				carry = result/power10;
+				remainder = result - (carry * power10); 
+				factorial[j] = remainder;
+			}
+			else 
+			{
+				carry = 0;
+				factorial[j] = result;
+			}
+		}
+		if (carry > 0)
+		{
+			factorial[numElements] = carry;
+			numElements++;
+		}
+	}
+	
+	// Will output to both the screen and file, should the user choose to do so in the main function.
+	cout << N <<"! = ";
+	if (file_out)
+	{
+		f_out << N <<"! = ";
+	}
+	for (int i = numElements-1; i >= 0; i--)// numElements - 1, is the 1st elt
+	{
+		//output factorial[i]
+		if (factorial[i] == 0)
+		{
+			// Adding leading zeros to both keyboard input and file input to ensure array blocks are properly filled.
+			// Using if-else statements to display either using keyboard or file.
+			cout <<"000000";
+			if (file_out)
+			{
+				f_out << "000000";
+			}
+		}
+		else if(numElements-1 == i)
+		{
+			cout << factorial[i];
+			if (file_out)
+			{
+				f_out << factorial[i];
+			}
+		}
+		else
+		{
+			double numDigits = log(static_cast<double> ( factorial[i]))/log(10.0)+1;
+			// 6 digits in a block
+			int zeros = 6 - (static_cast<int> (numDigits));
+
+			for (int j = 0; j < zeros; j++)
+			{
+				cout << 0;
+				if (file_out)
+				{
+					f_out << 0;
+				}		
+			}
+			cout << factorial[i];
+			if (file_out)
+			{
+				f_out << factorial[i];
+			}
+		}
+	}
+	cout<<endl;
+	
+	if (file_out)
+		f_out << endl;
+
+	
+
+}

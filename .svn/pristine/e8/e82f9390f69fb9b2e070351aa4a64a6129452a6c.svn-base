@@ -1,0 +1,140 @@
+// Ngwa T Leonard
+// CS 1
+// Lab11 Program
+// 07/21/2013
+
+#include <iostream>
+#include "converter.h" 
+using namespace std;
+
+// Function to get user input
+void  userInfo(int& num, int& oldBase, int& newBase)
+
+{
+
+	int digit, place, numNewBase;
+	//char response('0');
+
+        std::cout << "Enter your number between 1 and 2147483647." << std::endl;
+
+        std::cin >> num;
+
+		/*while((!num >= 1) && (!num <= 2147483647))
+		{ 
+			
+            std::cout<<"Your number is out of range, please re-enter a valid number." << std::endl;
+
+			std::cin>>num;
+		}*/
+		
+        
+        std::cout << "What base is your number currently in?"<< std::endl;
+
+        std::cin >> oldBase;
+
+       // if(oldBase!=10)
+		//{
+           /* // Checks to make sure number input can be represented in the given base.
+            if(digit >= oldBase)
+			{
+                std::cout << "Number is not within the range of specified base. Re-enter a number and base." << std::endl;
+
+                response = 'y';
+                //continue;
+			}*/
+		//}
+        std::cout << "What base would you like your number converted to? (Must be between 2 to 10)" << std::endl;
+
+        std::cin >> newBase;
+
+        std::cout << std::endl;
+        
+       /* if((!newBase >= 2) && (!newBase <= 10))
+
+		{
+            std::cout << "New base input is out of range, please re-enter a new base to convert to, between 2 to 10." << std::endl << std::endl;
+
+            std::cin >> newBase;
+		}*/
+}
+
+// Function to convert user's number to base 10
+void convetToTen(int& num, int& oldBase)
+
+{
+		/*int digit, numNewBase, place;
+		char response;
+        if(oldBase!=10)
+		{
+            digit = num % 10;
+            // Checks to make sure number input can be represented in the given base.
+            if(digit >= oldBase)
+			{
+                std::cout << "Number is not within the range of specified base. Re-enter a number and base." << std::endl;
+                response = 'y';
+                continue;
+            }
+            
+            int numBaseTen = digit;
+            place = 1;
+            num = num/10;
+            
+            while(num != 0){
+                digit = num % 10;
+                place = place * oldBase;
+                numBaseTen = numBaseTen + (digit * place);
+                num = num / 10;
+            }
+            num = numBaseTen;
+            std::cout<<"Your number in base 10 is "<< num <<std::endl;
+		}
+		return 0;
+}*/
+
+	int digit, numNewBase, place;
+
+        if(oldBase!=10)
+		{
+            digit = num % 10;
+            
+        }
+            
+            int numBaseTen = digit;
+            place = 1;
+            num = num/10;
+            
+            if((!num < 0) && (!num > 2147483647))
+			{
+                digit = num % 10;
+                place = place * oldBase;
+                numBaseTen = numBaseTen + (digit * place);
+                num = num / 10;
+            }
+
+            num = numBaseTen;
+			
+			
+            std::cout<<"Your number in base 10 is "<< num <<std::endl;
+}
+		
+
+
+// Function to convert user's base 10 number to their desired new base.
+void tenToAnyBase(int& num, int& newBase)
+
+{
+	int digit, numNewBase, place;
+
+	numNewBase = num % newBase;
+        place = 1;
+        num /= newBase;
+        
+            digit = num % newBase;
+            place *= 10;
+
+            numNewBase += (digit * place);
+            num /= newBase;
+
+        std::cout << "Your number in base " << newBase << " is: " << numNewBase << std::endl << std::endl;
+
+}

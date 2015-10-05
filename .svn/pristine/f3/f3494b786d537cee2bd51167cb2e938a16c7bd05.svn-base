@@ -1,0 +1,14 @@
+=================================================================================
+Score: 40
+
+  Remarks:
+   arrayoffsets.cpp:
+    -10  Did not check for subscripts is before beginning of array or after end
+          of array.
+
+  Ask your lab instructor if you have any questions about or problems
+  with your score.
+
+-------------------
+2013-July-18
+-------------------

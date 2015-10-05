@@ -1,0 +1,76 @@
+# include<iostream>
+# include<ctime>
+# include<cstdlib>
+# include<iomanip>
+using namespace std;
+
+void rolling(int& side_die_1, int& side_die_2);
+void display(int twoDiceArray[][6]);
+
+int main()
+{
+    unsigned short seed;
+	char response;
+	int numOfRolls;
+	int side_die_1;
+	int side_die_2;
+	int twoDiceArray[6][6];
+
+	do 
+{
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 6; j++)
+			 twoDiceArray[i][j] = 0;
+	}
+
+	
+	cout <<"Enter seed" << endl;
+	cin >> seed;
+	srand(seed);
+
+
+	cout <<"How many times do you want to roll the dice?" << endl;
+	cin >> numOfRolls;
+
+	for (int i = 0; i < numOfRolls; i++)
+	{
+		rolling(side_die_1, side_die_2);
+		
+	}
+	    display(twoDiceArray);
+
+		cout <<"If you would like to continue the game, press Y for yes, or else good-bye." << endl;
+
+		cin >> response;
+
+		cout << endl;
+} while ((response == 'Y') || (response == 'y'));
+
+
+	return 0;
+
+}
+
+void rolling(int& side_die_1, int& side_die_2)
+{
+	side_die_1 = 1 + rand() % 6;
+	side_die_2 = 1 + rand() % 6;	
+}
+
+void display(int twoDiceArray[][6])
+{
+	cout << setw(7) <<"1"<<setw(5)<<"2"<<setw(5)<<"3"<<setw(5)<<"4"<<setw(5)<<"5"<<setw(5)<<"6"<<endl;
+		for (int diceOne = 0; diceOne < 6; diceOne++)
+	{
+			cout << diceOne + 1 <<" ";
+		
+			for (int diceTwo = 0; diceTwo < 6; diceTwo++)
+		
+			cout << setw(2) << twoDiceArray[diceOne][diceTwo];
+			
+		cout << endl;
+	}
+	
+}
+

@@ -1,0 +1,209 @@
+//Ngwa T Leonard
+//CS1 Summer Session
+//Lab12. Finding the factorial of a number and outputting it on sreen or printing on a file.
+//01/23/2013
+
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+#include <string>
+
+using namespace std;
+struct student
+{
+	string name;
+	float exam1, exam2, exam3, finalexam;
+	float finalGrade;
+	char letterGrade;
+	short rank;
+};
+
+void finalGrade(student& myStudent)
+{
+
+
+	myStudent.finalGrade = (0.2 * (myStudent.exam1 + myStudent.exam2 + myStudent.exam3)) + (0.4 * myStudent.finalexam); 
+
+	if(myStudent.finalGrade<60)
+		myStudent.letterGrade = 'F';
+	else if(myStudent.finalGrade<70)
+		myStudent.letterGrade = 'D';
+	else if(myStudent.finalGrade<80)
+		myStudent.letterGrade = 'C';
+	else if(myStudent.finalGrade<90)
+		myStudent.letterGrade = 'B';
+	else
+		myStudent.letterGrade = 'A';
+}
+
+// This function allows the user to enter their informations from the keyboard.
+int keyboardInput(student* stuArray)
+
+{
+	//double exam1, exam2, exam3, finalexam;
+	int numOfStudents;
+
+	cout <<"This option allows you to enter your grades from the keyboard. Please proceed." << endl << endl;
+
+	cout<<"How many students do you have to enter?"<<endl;
+
+	cin>> numOfStudents;
+
+	stuArray = new student[numOfStudents];
+
+	for (int i = 0; i < numOfStudents; i++)
+	{
+		cout<<"Now entering student "<<i+1 << endl;
+
+		cout <<"Please enter this student's name." << endl;
+		cin >> stuArray[i].name;
+		cout << endl;
+
+		cout <<"Please enter this student's exam 1 grade." << endl;
+		cin >> stuArray[i].exam1;
+		cout << endl;
+
+		cout <<"Please enter this student's exam 2 grade." << endl;
+		cin >> stuArray[i].exam2;
+		cout << endl;
+
+		cout <<"Please enter this student's exam 3 grade." << endl;
+		cin >> stuArray[i].exam3;
+		cout << endl;
+
+		cout <<"Please enter this student's final exam grade." << endl;
+		cin >> stuArray[i].finalexam;
+		cout << endl;
+
+		finalGrade(stuArray[i]);
+	}
+
+	return numOfStudents;
+}
+
+int fileInput(student* stuArray)
+{
+	stuArray = new student[50];
+	int studentCounter=0;
+	char  filename[30];
+
+	ifstream finalgrade_in;
+	cout<<"Please enter a file name for input"<<endl;
+	cin>>filename;
+
+	finalgrade_in.open(filename);
+
+	if(finalgrade_in.fail())
+	{
+		cout << "Input file failed to open.";
+		exit(1);
+	}
+
+	while(finalgrade_in >> stuArray[studentCounter].name >> stuArray[studentCounter].exam1 >> 
+		stuArray[studentCounter].exam2 >> stuArray[studentCounter].exam3 >> stuArray[studentCounter].finalexam)
+	{
+		finalGrade(stuArray[studentCounter]);
+		studentCounter++;
+	}
+
+	return studentCounter;
+
+}
+
+
+void studentRank(student* stuArr,int N)
+
+{
+	// using the sort algorithm here
+	for (int i = 0; i < N-1; i++)
+	{
+		//store the first elt and its position
+		float maxGrade=stuArr[i].finalGrade;
+		int maxPos=i;
+		for (int j=i+1; j<N; j++)
+		{
+			if (stuArr[j].finalGrade > maxGrade)
+			{
+				maxGrade = stuArr[j].finalGrade;
+				maxPos = j;
+
+			}
+		}
+		//swap stuArr[maxPos] with stuArr[i]
+	}
+	
+	/*In order to do this you will have to dynamically allocate a separate array contain short integer numbers
+	that has the same number of elements as the number of records stored in the student structure. You will use 
+	a selection sort algorithm to assist in generating and assigning a rank value for each of the records in the structure. 
+	Delete the array you allocated to assist in generating the rank for each record after finish the ranking task.*/
+}
+
+
+void printOut(student* stuArr,int studentCount)
+{
+	/*Write a function to send the data to an output file named "finalgrade.out". 
+	Write each record to the output file. Before you write the records in the structure, 
+	write a heading for each field based on the description of the structure above. Align
+	the output so that each record is aligned in the output file. Write an end of line marker
+	at the end of each record while writing to the output file. Print the records in ascending order using the Rank field to screen. */
+
+	ofstream out("finalgrade.out");
+	out << setw(15) << "Name" << setw(15) << "Exam 1" << setw(15) << "Exam 2" << setw(15) << "Exam 3" 
+		<< setw(15) << "Final Exam" << setw(15) << "Final Grade" << std::setw(15) << " Letter Grade" << std::endl;
+
+	for (int i= 0; i<studentCount; i++)
+	{
+		out << setw(15) << stuArr[i].name << setw(15) << stuArr[i].exam1 << setw(15) << stuArr[i].exam2 << setw(15) 
+			<< stuArr[i].exam3 << setw(15) << stuArr[i].finalexam << setw(15) << stuArr[i].finalGrade << setw(15) 
+			<< stuArr[i].letterGrade << endl;
+	}
+
+	out.close();
+
+}
+
+int main()
+{
+	char response;
+	int numOfStudents;
+	student *stuArr=0;
+	
+	cout<<"Would you like to read in the student's grades from the [K]eyboard, or a [F]ile? "<< endl;
+	cin>>response;
+
+	if()// an if else statement here will be nice. 
+		keyboardInput(stuArr);
+	else
+		fileInput(stuArr);
+	studentRank(stuArr);
+	printOut(stuArr, numOfStudents);
+	system("pause");
+	delete[] stuArr;
+	return 0;
+}
+/*Write a function to read data set from the keyboard. It should ask the user to enter how many student records to be entered (Maximum is 50) and store in the structure. Before you insert each record in the structure you can compute the final grade and assign the letter grade to each record. 
+
+Write a function to read records from a file and insert the records into the structure. Read data from an input file until the file is empty. Before you insert each record in the structure you can compute the final grade and assign the letter grade to each record. Each record in the file will contain the following information: name, exam1, exam2, exam3, finalexam.
+Example:
+Michael 65 75 85 95 
+....
+Write a function to compute final grade and assign the letter grade to each record. Formula for compute the final grade is following:
+Final grade = exam1 * 0.2 + exam2 * 0.2 + exam3 * 0.2 + exam4 * 0.4
+Letter grades are assigned based on the following scale.
+90 - 100 A
+80 - 89 B
+70 - 79 C
+60 - 69 D
+Below F
+
+
+
+Write a function to rank the students in order of the final grade so that the highest grade has a rank of 1 and the lowest grade has a rank with a high number. In order to do this you will have to dynamically allocate a separate array contain short integer numbers that has the same number of elements as the number of records stored in the student structure. You will use a selection sort algorithm to assist in generating and assigning a rank value for each of the records in the structure. Delete the array you allocated to assist in generating the rank for each record after finish the ranking task. 
+
+Write a function to send the data to an output file named "finalgrade.out". Write each record to the output file. Before you write the records in the structure, write a heading for each field based on the description of the structure above. Align the output so that each record is aligned in the output file. Write an end of line marker at the end of each record while writing to the output file. Print the records in ascending order using the Rank field to screen. 
+
+Make sure your program adheres to proper programming style. Submit your project to the subversion repository. Do not forget to verify your submission on the web. File name should be "structgrade.cpp" 
+
+*/

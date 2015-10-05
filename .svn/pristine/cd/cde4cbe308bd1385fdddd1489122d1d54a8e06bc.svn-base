@@ -1,0 +1,73 @@
+// Ngwa T Leonard
+// CS1, Program 7.
+// 07/05/2013
+// Code to read student names, their exam scores, calculate their final grade, assign a letter grade, from one file and print it to another.
+
+// My included libraries.
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <iomanip>  // Included to use setw()
+    
+int main(){
+    std::ifstream in;
+    std::ofstream out;
+    
+    in.open("grade.txt");
+    if(in.fail()){          // Tests if my file opens and outputs a message if it doesn't
+        std::cout << "Input file failed to open.";
+        exit(1);
+    }
+    out.open("finalgrade.txt");
+        
+    double examOne, examTwo, examThree, examFour, finalGrade;
+    char firstName[10], lastName[10], letterGrade;
+        
+    std::cout << "Computing students' grade." << std::endl;
+    out << std::setw(20) << "Name" << std::setw(12) << "Exam 1" << std::setw(12) << "Exam 2" << std::setw(12) << "Exam 3" << std::setw(12) << "Exam 4" << std::setw(15) << "Final Score" << std::setw(15) << "Grade" << std::endl;
+        
+    in >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+    
+	//Using a while loop to continue reading from the created file, if it is not the end of the file.
+    while(!in.eof()){
+        finalGrade = (0.2 * (examOne + examTwo + examThree)) + (0.4 * examFour);
+
+        // code to assign letter grades.
+        if(finalGrade<60)
+           letterGrade = 'F';
+        else if(finalGrade<70)
+            letterGrade = 'D';
+        else if(finalGrade<80)
+            letterGrade = 'C';
+        else if(finalGrade<90)
+            letterGrade = 'B';
+        else
+            letterGrade = 'A';
+        
+        out << std::setw(10) << firstName << std::setw(10) << lastName << std::setw(12) << examOne << std::setw(12) << examTwo << std::setw(12) << examThree << std::setw(12) << examFour << std::setw(15) << finalGrade << std::setw(15) << letterGrade << std::endl;
+        in >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+
+    }
+    // Calculates and assigns the students final grades.
+	finalGrade = (0.2 * (examOne + examTwo + examThree)) + (0.4 * examFour);
+    
+    if(finalGrade<60)
+        letterGrade = 'F';
+    else if(finalGrade<70)
+        letterGrade = 'D';
+    else if(finalGrade<80)
+        letterGrade = 'C';
+    else if(finalGrade<90)
+        letterGrade = 'B';
+    else
+        letterGrade = 'A';
+    out << std::setw(10) << firstName << std::setw(10) << lastName << std::setw(12) << examOne << std::setw(12) << examTwo << std::setw(12) << examThree << std::setw(12) << examFour << std::setw(15) << finalGrade << std::setw(15) << letterGrade << std::endl;
+    in >> firstName >> lastName >> examOne >> examTwo >> examThree >> examFour;
+
+    std::cout << "Grading is complete!" << std::endl;
+    // Closes the input and output files.
+	in.close();
+    out.close();
+    
+	return 0;
+}

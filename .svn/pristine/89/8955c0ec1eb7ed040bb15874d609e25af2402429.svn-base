@@ -1,0 +1,40 @@
+#include <iostream>
+
+void convetToTen(int&num, int& oldBase, int&newBase)
+{
+	int digit, numNewBase, place;
+	char response;
+	int num;
+
+        if(oldBase!=10)
+		{
+            digit = num % 10;
+            // Checks to make sure number input can be represented in the given base.
+            if(digit >= oldBase)
+			{
+                std::cout << "Number is not within the range of specified base. Re-enter a number and base." << std::endl;
+                std::cin>> response; //= 'y';
+				response = 'y';
+				//continue;
+            }
+            
+            int numBaseTen = digit;
+            place = 1;
+            num = num/10;
+            
+            while(num != 0)
+			{
+                digit = num % 10;
+                place = place * oldBase;
+                numBaseTen = numBaseTen + (digit * place);
+                num = num / 10;
+            }
+            num = numBaseTen;
+            std::cout<<"Your number in base 10 is "<< num <<std::endl;
+        }
+}
+
+void TenToAnyBase()
+{
+
+}

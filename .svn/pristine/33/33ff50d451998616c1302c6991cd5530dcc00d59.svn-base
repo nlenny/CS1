@@ -1,0 +1,90 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	/*int sum = 0;
+	int num = 0;
+	int pow = 1;
+	int base_to;
+	
+	cout << "please enter your number" << endl;
+	cin >> num;
+	cout << "please enter your base" << endl;
+	cin >> base_to;*/
+	
+	
+	
+
+	
+	
+	
+	
+	int anybase = 0;
+	int newbase = 0;
+	int sum = 0;
+	int num = 0;
+	int pow = 1;
+	int base_to;
+	
+	cout << "please enter your number" << endl;
+	cin >> num;
+	cout << "please enter your base" << endl;
+	cin >> base_to;
+	while (num != 0){
+	sum+= num % base_to * pow;	
+	num/= base_to;
+	pow*=10;
+	}
+	cout << sum;
+	
+	/*sum+= num % 10 * pow;
+	num/= 10;
+	pow*=base_to;
+	}
+		 cout << sum;*/
+	/*int num, oldBase, newBase;
+    cout << "Enter your number: " << endl;
+    cin >> num;
+    cout << "What base is your number currently in? " << endl;
+    cin >> oldBase;
+    cout << "What base do you want to convert to? (Please choose a base between 2 and 10) " << endl;
+    cin >> newBase;
+    while((newBase<2)||(newBase>10)){
+        cout << "New base input is invalid. Enter a new base to convert to." << endl;
+        cin >> newBase;
+    }
+    int digit, numNewBase, place;
+    if(oldBase!=10){
+        digit = num % 10;
+			cout << digit;
+		// Figure out comment.
+        int numBaseTen = digit;
+        place = 1;
+        num = num/10;
+        while(num != 0){
+            digit = num % 10;
+            place = place * oldBase;
+            numBaseTen = numBaseTen + (digit * place);
+            num = num / 10;
+        }
+        num = numBaseTen;
+    }
+    digit = num % newBase;
+    numNewBase = digit;
+    place = 1;
+    num = num / newBase;
+    while(num != 0){
+        digit = num % newBase;
+        place = place * 10;
+        numNewBase = numNewBase + (digit * place);
+        num = num / newBase;
+        }
+    cout << "Your number in base " << newBase << " is: " << numNewBase << endl;
+	return 0;
+    // cout << "would you like to convert another number? (Y/N);
+    // while(___ == 'Y')*/
+}
+
+

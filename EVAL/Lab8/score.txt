@@ -1,0 +1,19 @@
+=================================================================================
+Score: 25 + 20
+
+  Remarks:
+   gradearray.cpp:
+    -25  Can not compile.
+         Still not compile. (Did not include cstdlib header file.
+    +20  Fixed the program.
+	
+  Ask your lab instructor if you have any questions about or problems
+  with your score.
+
+-------------------
+2013-July-15
+regraded at
+2013-July-18
+regraded at
+2013-July-22
+-------------------

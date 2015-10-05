@@ -1,0 +1,15 @@
+=================================================================================
+Score: 50
+
+  Remarks:
+   structgrade.cpp:
+     -10  Did not check input validation for exam grade.
+     -20  Did not have rank task!
+     -20  Logic error(s) are present. (Did not write to file at all!)
+
+  Ask your lab instructor if you have any questions about or problems
+  with your score.
+
+-------------------
+2013-August-01
+-------------------

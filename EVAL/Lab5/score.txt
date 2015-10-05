@@ -1,0 +1,13 @@
+=================================================================================
+Score: 45
+
+  Remarks:
+   guessing.cpp:
+     -5  Logic error(s) are present. (Same random number was pick after first run!)
+
+  Ask your lab instructor if you have any questions about or problems
+  with your score.
+
+-------------------
+2013-July-1
+-------------------

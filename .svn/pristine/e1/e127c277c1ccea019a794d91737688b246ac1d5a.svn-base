@@ -1,0 +1,36 @@
+#include <iostream>
+
+#include "converter.h"
+
+using namespace std;
+
+int main()
+
+{
+	char response;
+
+	do
+
+	{
+
+	int num, oldBase, newBase;
+
+	userInfo(num, oldBase, newBase);
+
+	convetToTen(num, oldBase, newBase);
+
+    tenToAnyBase(num, oldBase, newBase);
+
+	system("PAUSE");
+
+	std::cout<<"Would you like to continue?"<<std::endl;
+
+	std::cin>>response;
+
+	std::cout<<std::endl;
+
+	}while((response=='Y')||(response=='y'));
+
+	return 0;
+
+}

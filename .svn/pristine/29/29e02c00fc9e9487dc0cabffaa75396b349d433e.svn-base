@@ -1,0 +1,83 @@
+//Ngwa T Leonard
+//CS1 Summer session
+//Lab11 Project.
+//07/21/2013
+
+#include <iostream>
+#include <cstdlib>
+#include "converter.h"
+
+// Function to get user's number, base converting from and base to convert to.
+
+void userInput (int& num, int& oldBase, int& newBase)
+{
+			std::cout <<"Enter a number between 1 and 2147483647." << std::endl;
+
+			std::cin >> num;
+
+			while((num<1) ||(num>2147483647))
+			{
+				std::cout <<"Your number is out of range, please enter a valid number." << std::endl;
+
+				std::cin>>num;
+			}
+
+			std::cout <<"What base is your number currently in?"<< std::endl;
+
+			std::cin >> oldBase;
+
+			std::cout <<"What new base do you want to convert to, between 2 to 10?" << std::endl;
+
+			std::cin >> newBase;
+
+			std::cout << std::endl;
+
+			while ((newBase < 2) || (newBase > 10))
+			{
+				std::cout <<"Your new base is not between 2 to 10, please re-enter your new base." << std::endl;
+
+				std::cin >> newBase;
+			}		
+			
+			
+}
+
+// Function to convert user's number from it's old base to base 10. It returns digitOne
+void anyBaseToTen(int& num, int& oldBase, int& digitOne) 
+{
+	int placeOne = 1;
+
+	digitOne = 0;
+
+	while (num != 0)
+
+	{ 
+   	   digitOne = digitOne + num % 10 * placeOne;
+   	   num = num/10;
+   	   placeOne = placeOne * oldBase;
+    }
+}
+
+//Function to convert user's number in base 10 to the user's specified base. It returns digitTwo
+
+void tenToAnyBase (int & num, int & newBase, int& digitTwo)
+
+{
+    digitTwo = 0;
+	int placeTwo = 1;
+ 
+
+  while (num != 0)
+  { 
+
+  digitTwo = digitTwo + num % newBase * placeTwo;
+  num = num/newBase;
+  placeTwo = placeTwo * 10;
+ 
+  }
+
+     if((digitTwo > 2147483647) || (digitTwo < 0))
+
+		 std::cout << "Your number will not fit the base you want to convert to." << std::endl; 
+	
+}
